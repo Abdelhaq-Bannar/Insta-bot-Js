@@ -1,0 +1,58 @@
+{
+    "update_url": "https://clients2.google.com/service/update2/crx",
+    "manifest_version": 2,
+    "name": "Insta Follow & Comment Extension",
+    "description": "Insta Chrome extension unlimited version",
+    "version": "1.1.0",
+    "browser_action": {
+        "default_popup": "./popup.html",
+        "default_icon": "./assets/images/icon128.png"
+    },
+    "icons": {
+        "128": "./assets/images/icon128.png"
+    },
+    "permissions": [
+        "tabs",
+        "storage",
+        "cookies",
+        "unlimitedStorage",
+        "webRequest",
+        "*://*.instagram.com/*",
+        "webRequestBlocking",
+        "https://api.instagram.com/*",
+        "<all_urls>"
+    ],
+    "background": {
+        "persistent": true,
+        "scripts": [
+            "./libs/moment.js",
+            "./libs/jquery.js",
+            "./libs/utility.js",
+            "./background.js"
+        ]
+    },
+    "content_scripts": [{
+        "matches": [
+            "https://www.instagram.com/*"
+        ],
+        "all_frames": true,
+        "css": [
+            "./assets/css/toastr.min.css",
+            "./assets/css/content.css"
+        ],
+        "js": [
+            "./libs/jquery.js",
+            "./libs/toast.min.js",
+            "./libs/moment.js",
+            "./libs/axios.js",
+            "./libs/sweetAlert.js",
+            "./libs/utility.js",
+            "./content.js"
+        ],
+        "run_at": "document_end"
+    }],
+    "content_security_policy": "script-src 'self' https://api.instagram.com/* https://i.instagram.com/api/* ; object-src 'self'",
+    "web_accessible_resources": [
+        "*.*"
+    ]
+}
